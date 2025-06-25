@@ -1,0 +1,32 @@
+# Node modules
+**/node_modules
+
+# Build artifacts
+/dist
+/coverage
+
+# Logs
+/npm-debug.log*
+/.nyc_output
+/logs
+*.log
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE-specific files
+.idea/
+.vscode/
+
+# Editor files
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# NestJS CLI cache
+.nest-cli.json.cache
