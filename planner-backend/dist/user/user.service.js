@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserService = void 0;
 const common_1 = require("@nestjs/common");
+const argon2_1 = require("argon2");
 const prisma_service_1 = require("../prisma.service");
 let UserService = class UserService {
     prisma;
@@ -24,6 +25,22 @@ let UserService = class UserService {
             },
             include: {
                 tasks: true
+            }
+        });
+    }
+    async getByEmail(email) {
+        return this.prisma.user.findUnique({
+            where: {
+                email
+            },
+        });
+    }
+    async create(dto) {
+        return this.prisma.user.create({
+            data: {
+                email: dto.email,
+                name: "",
+                password: await (0, argon2_1.hash)(dto.password)
             }
         });
     }
