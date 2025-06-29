@@ -6,6 +6,8 @@ export declare class AuthService {
     private jwt;
     private userService;
     constructor(jwt: JwtService, userService: UserService);
+    EXPIRE_DAY_REFRESH_TOKEN: number;
+    REFRESH_TOKEN_NAME: string;
     login(dto: AuthDto): Promise<{
         accessToken: string;
         refreshToken: string;
@@ -38,4 +40,5 @@ export declare class AuthService {
     private issueTokens;
     private validateUser;
     addRefreshTokenToResponse(res: Response, refreshToken: string): void;
+    removeRefreshTokenToResponse(res: Response): void;
 }

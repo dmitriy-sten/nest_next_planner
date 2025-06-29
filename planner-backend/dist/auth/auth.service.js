@@ -21,6 +21,8 @@ let AuthService = class AuthService {
         this.jwt = jwt;
         this.userService = userService;
     }
+    EXPIRE_DAY_REFRESH_TOKEN = 1;
+    REFRESH_TOKEN_NAME = 'refresh-token';
     async login(dto) {
         const { password, ...user } = await this.validateUser(dto);
         const tokens = this.issueTokens(user.id);
@@ -59,8 +61,26 @@ let AuthService = class AuthService {
         return user;
     }
     addRefreshTokenToResponse(res, refreshToken) {
-        res.
-        ;
+        const expiresIn = new Date();
+        expiresIn.setDate(expiresIn.getDate() + this.EXPIRE_DAY_REFRESH_TOKEN);
+        res.cookie(this.REFRESH_TOKEN_NAME, refreshToken, {
+            expires: expiresIn,
+            domain: 'localhost',
+            httpOnly: true,
+            secure: true,
+            sameSite: 'none'
+        });
+    }
+    removeRefreshTokenToResponse(res) {
+        const expiresIn = new Date();
+        expiresIn.setDate(expiresIn.getDate() + this.EXPIRE_DAY_REFRESH_TOKEN);
+        res.cookie(this.REFRESH_TOKEN_NAME, '', {
+            expires: new Date(),
+            domain: 'localhost',
+            httpOnly: true,
+            secure: true,
+            sameSite: 'none'
+        });
     }
 };
 exports.AuthService = AuthService;
