@@ -10,13 +10,14 @@ exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const auth_module_1 = require("./auth/auth.module");
 const config_1 = require("@nestjs/config");
-const user_module_1 = require("./user/user.module");
+const task_module_1 = require("./user/task.module");
+const user_module_1 = require("./task/user.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [config_1.ConfigModule.forRoot(), auth_module_1.AuthModule, user_module_1.UserModule,],
+        imports: [config_1.ConfigModule.forRoot(), auth_module_1.AuthModule, user_module_1.UserModule, task_module_1.TaskModule],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map

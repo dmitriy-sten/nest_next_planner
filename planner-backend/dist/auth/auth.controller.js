@@ -22,7 +22,7 @@ let AuthController = class AuthController {
         this.authService = authService;
     }
     async login(dto, response) {
-        const { refreshToken, ...res } = await this.authService.register(dto);
+        const { refreshToken, ...res } = await this.authService.login(dto);
         this.authService.addRefreshTokenToResponse(response, refreshToken);
         return res;
     }
@@ -30,6 +30,15 @@ let AuthController = class AuthController {
         const { refreshToken, ...res } = await this.authService.register(dto);
         this.authService.addRefreshTokenToResponse(response, refreshToken);
         return res;
+    }
+    async getNewToken(req, res) {
+        const refreshTokenFromCookies = req.cookies[this.authService.REFRESH_TOKEN_NAME];
+        if (!refreshTokenFromCookies) {
+            this.authService.removeRefreshTokenToResponse(res);
+            throw new common_1.UnauthorizedException('Refresh token not passed');
+        }
+        const { refreshToken, ...response } = await this.authService.getNewTokens(refreshTokenFromCookies);
+        return response;
     }
     async logout(res) {
         this.authService.removeRefreshTokenToResponse(res);
@@ -57,6 +66,15 @@ __decorate([
     __metadata("design:paramtypes", [auth_dto_1.AuthDto, Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "register", null);
+__decorate([
+    (0, common_1.HttpCode)(200),
+    (0, common_1.Post)('login/access-token'),
+    __param(0, (0, common_1.Req)()),
+    __param(1, (0, common_1.Res)({ passthrough: true })),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "getNewToken", null);
 __decorate([
     (0, common_1.HttpCode)(200),
     (0, common_1.Post)("logout"),

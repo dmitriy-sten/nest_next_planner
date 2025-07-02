@@ -14,7 +14,7 @@ const jwt_strategy_1 = require("./jwt.strategy");
 const config_1 = require("@nestjs/config");
 const jwt_1 = require("@nestjs/jwt");
 const jwt_config_1 = require("../config/jwt.config");
-const user_module_1 = require("../user/user.module");
+const user_module_1 = require("src/user/user.module");
 let AuthModule = class AuthModule {
 };
 exports.AuthModule = AuthModule;

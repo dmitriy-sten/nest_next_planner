@@ -43,7 +43,26 @@ export class AuthService {
     }
   }
 
-  9
+
+  async getNewTokens(refreshToken: string) {
+    const result = await this.jwt.verifyAsync(refreshToken)
+
+    if (!result) throw new UnauthorizedException("Invalid refresh token")
+
+    const user = await this.userService.getById(result.id)
+
+    if(!user) throw new NotFoundException('User not found')
+
+    const tokens = this.issueTokens(user.id)
+
+    return {
+      user, ...tokens
+    }
+  }
+
+
+
+
   private issueTokens(userId: string) {
 
     const data = { id: userId }

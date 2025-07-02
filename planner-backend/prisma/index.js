@@ -181,7 +181,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/dmitriy/Desktop/main/my_learn/nest_next_planner/planner-backend/prisma/generated/prisma",
+      "value": "/Users/dmitriy/Desktop/main/my_learn/nest_next_planner/planner-backend/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -199,10 +199,10 @@ const config = {
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
-    "schemaEnvPath": "../../../.env"
+    "rootEnvPath": "../.env",
+    "schemaEnvPath": "../.env"
   },
-  "relativePath": "../..",
+  "relativePath": "",
   "clientVersion": "6.10.1",
   "engineVersion": "9b628578b3b7cae625e8c927178f15a170e74a9c",
   "datasourceNames": [
@@ -217,8 +217,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\n// id String @id @default(cuid())\n// createdAt DateTime @default(now()) @map(\"created_at\")\n// updatedAt DateTime @updatedAt @map(\"updated_at\")\n\nmodel User {\n  id        String   @id @default(cuid())\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  email    String  @unique\n  name     String?\n  password String\n\n  workInterval   Int? @default(50) @map(\"work_interval\")\n  breakInterval  Int? @default(10) @map(\"break_interval\")\n  intervalsCount Int? @default(7) @map(\"intervals_count\")\n\n  tasks            Task[]\n  timeBlocks       TimeBlock[]\n  pomodoroSessions PomodoroSession[]\n\n  @@map(\"user\")\n}\n\nmodel Task {\n  id        String   @id @default(cuid())\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  name        String\n  priority    Priority?\n  isCompleted Boolean   @default(false) @map(\"is_completed\")\n\n  userId String @map(\"user_id\")\n  user   User   @relation(fields: [userId], references: [id])\n\n  @@map(\"task\")\n}\n\nenum Priority {\n  low\n  meddium\n  high\n}\n\nmodel TimeBlock {\n  id        String   @id @default(cuid())\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  name     String\n  color    String?\n  duration Int\n  order    Int     @default(1)\n\n  userId String @map(\"user_id\")\n  user   User   @relation(fields: [userId], references: [id])\n\n  @@map(\"time_block\")\n}\n\nmodel PomodoroSession {\n  id        String   @id @default(cuid())\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  isCompleted Boolean @default(false) @map(\"is_completed\")\n\n  userId String @map(\"user_id\")\n  user   User   @relation(fields: [userId], references: [id])\n\n  rounds PomodoroRound[]\n\n  @@map(\"pomodoro_session\")\n}\n\nmodel PomodoroRound {\n  id        String   @id @default(cuid())\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  totalSeconds Int     @map(\"total_seconds\")\n  isCompleted  Boolean @default(false) @map(\"is_completed\")\n\n  pomodoroSessionId String          @map(\"pomodoro_session_id\")\n  pomodoroSession   PomodoroSession @relation(fields: [pomodoroSessionId], references: [id], onDelete: Cascade)\n\n  @@map(\"pomodoro_round\")\n}\n",
-  "inlineSchemaHash": "1810ce57687b416f361009c4a594bc23d76136e5897a977fdb76fddb0e082f72",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"./\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\n// id String @id @default(cuid())\n// createdAt DateTime @default(now()) @map(\"created_at\")\n// updatedAt DateTime @updatedAt @map(\"updated_at\")\n\nmodel User {\n  id        String   @id @default(cuid())\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  email    String  @unique\n  name     String?\n  password String\n\n  workInterval   Int? @default(50) @map(\"work_interval\")\n  breakInterval  Int? @default(10) @map(\"break_interval\")\n  intervalsCount Int? @default(7) @map(\"intervals_count\")\n\n  tasks            Task[]\n  timeBlocks       TimeBlock[]\n  pomodoroSessions PomodoroSession[]\n\n  @@map(\"user\")\n}\n\nmodel Task {\n  id        String   @id @default(cuid())\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  name        String\n  priority    Priority?\n  isCompleted Boolean   @default(false) @map(\"is_completed\")\n\n  userId String @map(\"user_id\")\n  user   User   @relation(fields: [userId], references: [id])\n\n  @@map(\"task\")\n}\n\nenum Priority {\n  low\n  meddium\n  high\n}\n\nmodel TimeBlock {\n  id        String   @id @default(cuid())\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  name     String\n  color    String?\n  duration Int\n  order    Int     @default(1)\n\n  userId String @map(\"user_id\")\n  user   User   @relation(fields: [userId], references: [id])\n\n  @@map(\"time_block\")\n}\n\nmodel PomodoroSession {\n  id        String   @id @default(cuid())\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  isCompleted Boolean @default(false) @map(\"is_completed\")\n\n  userId String @map(\"user_id\")\n  user   User   @relation(fields: [userId], references: [id])\n\n  rounds PomodoroRound[]\n\n  @@map(\"pomodoro_session\")\n}\n\nmodel PomodoroRound {\n  id        String   @id @default(cuid())\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  totalSeconds Int     @map(\"total_seconds\")\n  isCompleted  Boolean @default(false) @map(\"is_completed\")\n\n  pomodoroSessionId String          @map(\"pomodoro_session_id\")\n  pomodoroSession   PomodoroSession @relation(fields: [pomodoroSessionId], references: [id], onDelete: Cascade)\n\n  @@map(\"pomodoro_round\")\n}\n",
+  "inlineSchemaHash": "48462e4ee4c0310b508b335cc6b44e27659c5857e1860b48f4cb2e3eea908f86",
   "copyEngine": true
 }
 
@@ -227,8 +227,8 @@ const fs = require('fs')
 config.dirname = __dirname
 if (!fs.existsSync(path.join(__dirname, 'schema.prisma'))) {
   const alternativePaths = [
-    "prisma/generated/prisma",
-    "generated/prisma",
+    "prisma",
+    "",
   ]
   
   const alternativePath = alternativePaths.find((altPath) => {
@@ -258,7 +258,7 @@ Object.assign(exports, Prisma)
 
 // file annotations for bundling tools to include these files
 path.join(__dirname, "libquery_engine-darwin-arm64.dylib.node");
-path.join(process.cwd(), "prisma/generated/prisma/libquery_engine-darwin-arm64.dylib.node")
+path.join(process.cwd(), "prisma/libquery_engine-darwin-arm64.dylib.node")
 // file annotations for bundling tools to include these files
 path.join(__dirname, "schema.prisma");
-path.join(process.cwd(), "prisma/generated/prisma/schema.prisma")
+path.join(process.cwd(), "prisma/schema.prisma")

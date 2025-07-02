@@ -11,9 +11,10 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         private configService: ConfigService,
         private userService: UserService
     ) {
+        //@ts-ignore
         super({
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-            secretOrKey:'ewkerowekrweokweorkkrewkr',
+            secretOrKey: configService.get('JWT_SECRET'),
             ignoreExpiration: true,
         })
     }

@@ -11,32 +11,18 @@ export declare class AuthService {
     login(dto: AuthDto): Promise<{
         accessToken: string;
         refreshToken: string;
-        user: {
-            id: string;
-            createdAt: Date;
-            updatedAt: Date;
-            email: string;
-            name: string | null;
-            workInterval: number | null;
-            breakInterval: number | null;
-            intervalsCount: number | null;
-        };
+        user: any;
     }>;
     register(dto: AuthDto): Promise<{
         accessToken: string;
         refreshToken: string;
-        user: {
-            id: string;
-            createdAt: Date;
-            updatedAt: Date;
-            email: string;
-            name: string | null;
-            workInterval: number | null;
-            breakInterval: number | null;
-            intervalsCount: number | null;
-        };
+        user: any;
     }>;
-    9: any;
+    getNewTokens(refreshToken: string): Promise<{
+        accessToken: string;
+        refreshToken: string;
+        user: any;
+    }>;
     private issueTokens;
     private validateUser;
     addRefreshTokenToResponse(res: Response, refreshToken: string): void;
