@@ -12,13 +12,13 @@ export declare class AuthService {
         accessToken: string;
         refreshToken: string;
         user: {
+            email: string;
+            workInterval: number | null;
+            breakInterval: number | null;
+            name: string | null;
             id: string;
             createdAt: Date;
             updatedAt: Date;
-            email: string;
-            name: string | null;
-            workInterval: number | null;
-            breakInterval: number | null;
             intervalsCount: number | null;
         };
     }>;
@@ -26,13 +26,13 @@ export declare class AuthService {
         accessToken: string;
         refreshToken: string;
         user: {
+            email: string;
+            workInterval: number | null;
+            breakInterval: number | null;
+            name: string | null;
             id: string;
             createdAt: Date;
             updatedAt: Date;
-            email: string;
-            name: string | null;
-            workInterval: number | null;
-            breakInterval: number | null;
             intervalsCount: number | null;
         };
     }>;
@@ -41,23 +41,23 @@ export declare class AuthService {
         refreshToken: string;
         user: {
             tasks: {
+                name: string;
                 id: string;
                 createdAt: Date;
                 updatedAt: Date;
-                name: string;
                 priority: import("prisma").$Enums.Priority | null;
                 isCompleted: boolean;
                 userId: string;
             }[];
         } & {
-            id: string;
-            createdAt: Date;
-            updatedAt: Date;
             email: string;
-            name: string | null;
             password: string;
             workInterval: number | null;
             breakInterval: number | null;
+            name: string | null;
+            id: string;
+            createdAt: Date;
+            updatedAt: Date;
             intervalsCount: number | null;
         };
     }>;

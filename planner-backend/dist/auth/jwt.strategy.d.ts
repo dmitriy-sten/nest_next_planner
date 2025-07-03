@@ -12,23 +12,23 @@ export declare class JwtStrategy extends JwtStrategy_base {
         id: any;
     }): Promise<({
         tasks: {
+            name: string;
             id: string;
             createdAt: Date;
             updatedAt: Date;
-            name: string;
             priority: import("prisma").$Enums.Priority | null;
             isCompleted: boolean;
             userId: string;
         }[];
     } & {
-        id: string;
-        createdAt: Date;
-        updatedAt: Date;
         email: string;
-        name: string | null;
         password: string;
         workInterval: number | null;
         breakInterval: number | null;
+        name: string | null;
+        id: string;
+        createdAt: Date;
+        updatedAt: Date;
         intervalsCount: number | null;
     }) | null>;
 }

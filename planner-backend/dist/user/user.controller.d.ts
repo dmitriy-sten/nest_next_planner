@@ -6,21 +6,21 @@ export declare class UserController {
     profile(id: string): Promise<{
         user: {
             tasks: {
+                name: string;
                 id: string;
                 createdAt: Date;
                 updatedAt: Date;
-                name: string;
                 priority: import("prisma").$Enums.Priority | null;
                 isCompleted: boolean;
                 userId: string;
             }[];
+            email: string;
+            workInterval: number | null;
+            breakInterval: number | null;
+            name: string | null;
             id: string;
             createdAt: Date;
             updatedAt: Date;
-            email: string;
-            name: string | null;
-            workInterval: number | null;
-            breakInterval: number | null;
             intervalsCount: number | null;
         };
         statistics: {
