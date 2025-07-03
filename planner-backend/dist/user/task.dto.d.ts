@@ -1,5 +1,7 @@
+import { Priority } from "@prisma/client";
 export declare class TaskDto {
     name: string;
-    isCompleted: string;
-    createdAt: string;
+    isCompleted?: boolean;
+    createdAt?: string;
+    priority?: Priority;
 }

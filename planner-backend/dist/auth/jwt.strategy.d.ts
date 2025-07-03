@@ -10,6 +10,26 @@ export declare class JwtStrategy extends JwtStrategy_base {
     constructor(configService: ConfigService, userService: UserService);
     validate({ id }: {
         id: any;
-    }): Promise<any>;
+    }): Promise<({
+        tasks: {
+            id: string;
+            createdAt: Date;
+            updatedAt: Date;
+            name: string;
+            priority: import("prisma").$Enums.Priority | null;
+            isCompleted: boolean;
+            userId: string;
+        }[];
+    } & {
+        id: string;
+        createdAt: Date;
+        updatedAt: Date;
+        email: string;
+        name: string | null;
+        password: string;
+        workInterval: number | null;
+        breakInterval: number | null;
+        intervalsCount: number | null;
+    }) | null>;
 }
 export {};

@@ -1,6 +1,6 @@
 import { AuthDto } from 'src/auth/dto/auth.dto';
 import { PrismaService } from 'src/prisma.service';
-import { UserDto } from './task.dto';
+import { UserDto } from './user.dto';
 export declare class UserService {
     private prisma;
     constructor(prisma: PrismaService);

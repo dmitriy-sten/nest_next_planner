@@ -17,19 +17,40 @@ let TaskService = class TaskService {
     constructor(prisma) {
         this.prisma = prisma;
     }
-    async getById(id) {
-        return this.prisma.task.findUnique({
+    async getAll(userId) {
+        return this.prisma.task.findMany({
             where: {
-                id
+                userId
             },
         });
     }
-    async create(dto) {
-        return this.prisma.user.create({
+    async create(dto, userId) {
+        return this.prisma.task.create({
+            data: {
+                ...dto,
+                user: {
+                    connect: {
+                        id: userId
+                    }
+                }
+            }
+        });
+    }
+    async update(dto, taskId, userId) {
+        return this.prisma.task.update({
+            where: {
+                userId,
+                id: taskId
+            },
             data: dto
         });
     }
-    async update(id, dto) {
+    async delete(taskId) {
+        return this.prisma.task.delete({
+            where: {
+                id: taskId
+            }
+        });
     }
 };
 exports.TaskService = TaskService;

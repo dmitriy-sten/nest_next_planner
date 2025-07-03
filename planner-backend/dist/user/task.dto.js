@@ -10,11 +10,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TaskDto = void 0;
+const client_1 = require("@prisma/client");
+const class_transformer_1 = require("class-transformer");
 const class_validator_1 = require("class-validator");
 class TaskDto {
     name;
     isCompleted;
     createdAt;
+    priority;
 }
 exports.TaskDto = TaskDto;
 __decorate([
@@ -25,11 +28,17 @@ __decorate([
 __decorate([
     (0, class_validator_1.IsBoolean)(),
     (0, class_validator_1.IsOptional)(),
-    __metadata("design:type", String)
+    __metadata("design:type", Boolean)
 ], TaskDto.prototype, "isCompleted", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
 ], TaskDto.prototype, "createdAt", void 0);
+__decorate([
+    (0, class_validator_1.IsEnum)(client_1.Priority),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_transformer_1.Transform)(({ value }) => ('' + value).toLowerCase()),
+    __metadata("design:type", String)
+], TaskDto.prototype, "priority", void 0);
 //# sourceMappingURL=task.dto.js.map
